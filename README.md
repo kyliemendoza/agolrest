@@ -1,2 +1,2 @@
-# esrijs
-My first Esri JS Map
+# JS Stack Read
+Imported Sounny's esrijs map
