@@ -34,7 +34,7 @@
           zoom: 13, // Zoom level
           container: "viewDiv" // Div element
         });
-        
+      // ************************************************************
       const graphicsLayer = new GraphicsLayer();
       map.add(graphicsLayer);
 
@@ -70,8 +70,7 @@
         attributes: attributes,
         popupTemplate: popupTemplate
       });
-
-      // First create a line geometry (this is the Keystone pipeline)
+      // ************************************************************
       const polyline = {
         type: "polyline", // autocasts as new Polyline()
         paths: [[-97.758699, 30.265385],
@@ -120,11 +119,10 @@
         }
       });
 
-      // Define the polygon's geometry
+      // ************************************************************
       const polygon = {
         type: "polygon",
-        rings: [
-          // Add the coordinates for the vertices of your polygon here.
+        rings: [ // Add the coordinates for the vertices of your polygon here.
           [-97.737071, 30.261445],
           [-97.730738, 30.278585],
           [-97.750160, 30.284054],
@@ -132,8 +130,7 @@
         ]
       };
 
-      // Define the symbol for the polygon
-      const simpleFillSymbol = {
+      const simpleFillSymbol = { // Define the symbol for the polygon
         type: "simple-fill",
         color: [227, 139, 79, 0.8],  // Orange, semi-transparent
         outline: {
@@ -142,13 +139,24 @@
         }
       };
 
-      // Create a graphic for the polygon
-      const polygonGraphic = new Graphic({
+      const polygonAttributes = { // Define the attributes for the polygon
+        Name: "Downtown Austin",
+        Description: "Is the central business district of Austin, TX with most of the city's high-rise buildings. Population: 14,081."
+      };
+
+      const polygonPopupTemplate = { // Create a popup template for the polygon
+        title: "{Name}",
+        content: "{Description}"
+      };
+
+      const polygonGraphic = new Graphic({ // Create a graphic for the polygon
         geometry: polygon,
-        symbol: simpleFillSymbol
+        symbol: simpleFillSymbol,
+        attributes: polygonAttributes,
+        popupTemplate: polygonPopupTemplate
       });
 
-      // Add the graphic to the graphics layer
+      // Add ALL the graphics (point, polyline, polygon) to the graphics layer
       view.graphics.addMany([pointGraphic, polylineGraphic, polygonGraphic]);
   });
   </script>
