@@ -38,20 +38,18 @@
 
     const attributes = { // Create an object to store attributes
       name: "Stevie Ray Vaughan Statue",
-      location: "Auditorium Shores"      
+      description: "A bronze statue of Stevie Ray Vaughan, a blues rock guitarist from Austin, Texas."      
     };
 
     const popupTemplate = { // Create a popup template
-      title: "Stevie Ray Vaughan Statue",
-      content: "Stevie Ray Vaughan was an American musician, singer, songwriter, and record producer. He had a short career spanning seven years, but was one of the most influential guitarists in the revival of blues in the 1980s."
+      title: "{name}",
+      content: "{description}"
     };
-    
+
     const point = { // Create a point
       type: "point",
       longitude: -97.750689, // long lat of Stevie Ray Vaughan Statue
-      latitude: 30.263098,
-      attributes: attributes,
-      popupTemplate: popupTemplate
+      latitude: 30.263098
     };
 
     const simpleMarkerSymbol = { // Create a symbol for drawing the point
@@ -64,9 +62,11 @@
       }
     };
 
-    const pointGraphic = new Graphic({ // Create a graphic and add the geometry and symbol
+    const pointGraphic = new Graphic({ // Create a graphic and add the geometry and symbol to it
       geometry: point,
-      symbol: simpleMarkerSymbol
+      symbol: simpleMarkerSymbol,
+      attributes: attributes,
+      popupTemplate: popupTemplate
     });
 
     graphicsLayer.add(pointGraphic); // Add the graphic to the view
