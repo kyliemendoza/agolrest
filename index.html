@@ -104,18 +104,11 @@
           // autocasts as new PopupTemplate()
           title: "{Name}",
           content: [
-            {
-              type: "fields",
+            { type: "fields",
               fieldInfos: [
-                {
-                  fieldName: "Name"
-                },
-                {
-                  fieldName: "Owner"
-                },
-                {
-                  fieldName: "Length"
-                }
+                { fieldName: "Name" },
+                { fieldName: "Owner" },
+                { fieldName: "Length" }
               ]
             }
           ]
@@ -169,8 +162,8 @@
       }
 
       usaeduLayer = new FeatureLayer({ // Add the feature layer to the map
-        url: "https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/Colleges_and_Universities_View/FeatureServer"
-        // popupTemplate: popupEduusa
+        url: "https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/Colleges_and_Universities_View/FeatureServer",
+        popupTemplate: popupEduusa
       });
       
       outFields = ["NAME", "TOT_ENROLL"]; // Adding popup here
