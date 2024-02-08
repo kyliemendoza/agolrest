@@ -17,9 +17,10 @@
       "esri/Map",
       "esri/views/MapView",
       "esri/Graphic",
-      "esri/layers/GraphicsLayer",
-      "esri/geometry/Polygon"
-      ], function (esriConfig, Map, MapView, Graphic, GraphicsLayer, Polygon) {
+      "esri/geometry/Polyline",
+      "esri/geometry/Polygon",
+      "esri/layers/GraphicsLayer"
+      ], function (esriConfig, Map, MapView, Graphic, Polyline, Polygon, GraphicsLayer) {
 
       esriConfig.apiKey = "AAPK9c89b2be3b2847e5855098989dee99b2ti5ZLtJOzNptY3_yhg1lc2nqbYUD8RuNm4u3-LVBPsb_GdnzndOpiPIEc8_lM4bG"; //My API Key
       
@@ -70,7 +71,51 @@
         popupTemplate: popupTemplate
       });
 
-        // graphicsLayer.add(pointGraphic); // Add the graphic to the view
+      // First create a line geometry (this is the Keystone pipeline)
+      const polyline = {
+        type: "polyline", // autocasts as new Polyline()
+        paths: [[-97.750689, 30.263098], [-97.738453, 30.284918]]
+      };
+
+      // Create a symbol for drawing the line
+      const lineSymbol = {
+        type: "simple-line", // autocasts as SimpleLineSymbol()
+        color: [226, 119, 40],
+        width: 4
+      };
+
+      // Create an object for storing attributes related to the line
+      const lineAtt = {
+        Name: "Path from Stevie Ray Vaughan Statue to University of Texas at Austin",
+        Owner: "City of Austin",
+        Length: "000 km" // Update this with the actual length
+      };
+
+      const polylineGraphic = new Graphic({
+        geometry: polyline,
+        symbol: lineSymbol,
+        attributes: lineAtt,
+        popupTemplate: {
+          // autocasts as new PopupTemplate()
+          title: "{Name}",
+          content: [
+            {
+              type: "fields",
+              fieldInfos: [
+                {
+                  fieldName: "Name"
+                },
+                {
+                  fieldName: "Owner"
+                },
+                {
+                  fieldName: "Length"
+                }
+              ]
+            }
+          ]
+        }
+      });
 
       // Define the polygon's geometry
       const polygon = {
@@ -101,7 +146,7 @@
       });
 
       // Add the graphic to the graphics layer
-      view.graphics.addMany([pointGraphic, polygonGraphic]);
+      view.graphics.addMany([pointGraphic, polylineGraphic, polygonGraphic]);
   });
   </script>
 
