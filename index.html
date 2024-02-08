@@ -16,11 +16,14 @@
       "esri/config",
       "esri/Map",
       "esri/views/MapView",
+      // Adding the modules needed for the graphic and graphics layer
       "esri/Graphic",
       "esri/geometry/Polyline",
       "esri/geometry/Polygon",
-      "esri/layers/GraphicsLayer"
-      ], function (esriConfig, Map, MapView, Graphic, Polyline, Polygon, GraphicsLayer) {
+      "esri/layers/GraphicsLayer",
+      // Adding the module for the feature layers
+      "esri/layers/FeatureLayer"
+      ], function (esriConfig, Map, MapView, Graphic, Polyline, Polygon, GraphicsLayer, FeatureLayer) {
 
       esriConfig.apiKey = "AAPK9c89b2be3b2847e5855098989dee99b2ti5ZLtJOzNptY3_yhg1lc2nqbYUD8RuNm4u3-LVBPsb_GdnzndOpiPIEc8_lM4bG"; //My API Key
       
@@ -158,6 +161,22 @@
 
       // Add ALL the graphics (point, polyline, polygon) to the graphics layer
       view.graphics.addMany([pointGraphic, polylineGraphic, polygonGraphic]);
+    
+      // ************************************************************
+      const popupEduusa = { // Define a popup for the feature layer
+        "title": "EDUs",
+        "content": "<b>Name:</b> {NAME}<br><b>Total Enrollment:</b> {TOT_ENROLL}<br>"
+      }
+
+      usaeduLayer = new FeatureLayer({ // Add the feature layer to the map
+        url: "https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/Colleges_and_Universities_View/FeatureServer"
+        // popupTemplate: popupEduusa
+      });
+      
+      outFields = ["NAME", "TOT_ENROLL"]; // Adding popup here
+      popupTemplate = popupEduusa
+
+      map.add(usaeduLayer); // Add the feature layer to the map
   });
   </script>
 
