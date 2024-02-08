@@ -77,21 +77,20 @@
 
  // ************************************************************
       // Define a pop-up for usaeduLayer
-      const popupEduusa = {
+      const popupEduusa = { // CHALLENGE 3: Expand popup to be richer in info
         title: "{INSTNM}",
-        content: "Name: {INSTNM} Total Enrollment: {INSTSIZE}"
+        content: "Name: <b><a href='{WEBADDR}' target='_blank'>{INSTNM}</a><b> Total Enrollment: {INSTSIZE}"
       };
 
       // Adding the const for the feature layer
       const usaeduLayer = new FeatureLayer({
         url: "https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/Colleges_and_Universities_View/FeatureServer/0", // URL to the feature layer
-        outFields: ["INSTNM","INSTSIZE"], // Fields to include in the feature layer
+        outFields: ["INSTNM","INSTSIZE", "WEBADDR"], // Fields to include in the feature layer
         popupTemplate: popupEduusa // Assign the popup template to the feature layer
       });
 
       //adding the feature layer to the map
       map.add(usaeduLayer);
-
 
       // ************************************************************
       const polyline = {
