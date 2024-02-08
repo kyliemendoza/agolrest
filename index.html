@@ -17,8 +17,9 @@
     "esri/Map",
     "esri/views/MapView",
     "esri/Graphic",
-    "esri/layers/GraphicsLayer"
-  ], function (esriConfig, Map, MapView, Graphic, GraphicsLayer) {
+    "esri/layers/GraphicsLayer",
+    "esri/geometry/Polygon" // CHALLENGE 2: Adding Polyline and Polygon modules
+    ], function (esriConfig, Map, MapView, Graphic, GraphicsLayer, Polygon), {
 
     esriConfig.apiKey = "AAPK9c89b2be3b2847e5855098989dee99b2ti5ZLtJOzNptY3_yhg1lc2nqbYUD8RuNm4u3-LVBPsb_GdnzndOpiPIEc8_lM4bG"; //My API Key
     
@@ -70,6 +71,33 @@
     });
 
     graphicsLayer.add(pointGraphic); // Add the graphic to the view
+    
+    const polygon = {
+      type: "polygon",
+      rings: [
+        [-97.756402, 30.266874],
+        [-97.737000, 30.261438],
+        [-97.730648, 30.278598],
+        [-97.752091, 30.283831]
+      ]
+    };
+
+    const simpleFillSymbol = {
+      type: "simple-fill",
+      color: [227, 139, 79, 0.8],  // Orange color with transparency
+      outline: {
+        color: [255, 255, 255],  // White
+        width: 1
+      }
+    };
+
+    const polygonGraphic = new Graphic({
+      geometry: polygon,
+      symbol: simpleFillSymbol
+    });
+
+    graphicsLayer.add(polygonGraphic); // Add the graphic to the view
+
   });
   </script>
 
