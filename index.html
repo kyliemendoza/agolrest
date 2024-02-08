@@ -36,15 +36,28 @@
     const graphicsLayer = new GraphicsLayer();
     map.add(graphicsLayer);
 
+    const attributes = { // Create an object to store attributes
+      name: "Stevie Ray Vaughan Statue",
+      location: "Auditorium Shores"      
+    };
+
+    const popupTemplate = { // Create a popup template
+      title: "Stevie Ray Vaughan Statue",
+      content: "Stevie Ray Vaughan was an American musician, singer, songwriter, and record producer. He had a short career spanning seven years, but was one of the most influential guitarists in the revival of blues in the 1980s."
+    };
+    
     const point = { // Create a point
       type: "point",
       longitude: -97.750689, // long lat of Stevie Ray Vaughan Statue
-      latitude: 30.263098
+      latitude: 30.263098,
+      attributes: attributes,
+      popupTemplate: popupTemplate
     };
 
     const simpleMarkerSymbol = { // Create a symbol for drawing the point
       type: "simple-marker",
-      color: [0, 0, 139], // Color of blues rock
+      style: "square", // CHALLENGE 1: Changing from default circle to square
+      color: [0, 0, 139], // Color of blues rock,
       outline: {
         color: [255, 255, 255], // White
         width: 1
