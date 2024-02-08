@@ -17,8 +17,9 @@
       "esri/Map",
       "esri/views/MapView",
       "esri/Graphic",
-      "esri/layers/GraphicsLayer"
-      ], function (esriConfig, Map, MapView, Graphic, GraphicsLayer) {
+      "esri/layers/GraphicsLayer",
+      "esri/geometry/Polygon"
+      ], function (esriConfig, Map, MapView, Graphic, GraphicsLayer, Polygon) {
 
       esriConfig.apiKey = "AAPK9c89b2be3b2847e5855098989dee99b2ti5ZLtJOzNptY3_yhg1lc2nqbYUD8RuNm4u3-LVBPsb_GdnzndOpiPIEc8_lM4bG"; //My API Key
       
@@ -32,7 +33,7 @@
           zoom: 13, // Zoom level
           container: "viewDiv" // Div element
         });
-
+        
       const graphicsLayer = new GraphicsLayer();
       map.add(graphicsLayer);
 
@@ -69,8 +70,38 @@
         popupTemplate: popupTemplate
       });
 
-        graphicsLayer.add(pointGraphic); // Add the graphic to the view
+        // graphicsLayer.add(pointGraphic); // Add the graphic to the view
 
+      // Define the polygon's geometry
+      const polygon = {
+        type: "polygon",
+        rings: [
+          // Add the coordinates for the vertices of your polygon here.
+          [-97.737071, 30.261445],
+          [-97.730738, 30.278585],
+          [-97.750160, 30.284054],
+          [-97.756177, 30.267235]
+        ]
+      };
+
+      // Define the symbol for the polygon
+      const simpleFillSymbol = {
+        type: "simple-fill",
+        color: [227, 139, 79, 0.8],  // Orange, semi-transparent
+        outline: {
+          color: [255, 255, 255],  // White
+          width: 1
+        }
+      };
+
+      // Create a graphic for the polygon
+      const polygonGraphic = new Graphic({
+        geometry: polygon,
+        symbol: simpleFillSymbol
+      });
+
+      // Add the graphic to the graphics layer
+      view.graphics.addMany([pointGraphic, polygonGraphic]);
   });
   </script>
 
