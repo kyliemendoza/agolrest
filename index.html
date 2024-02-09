@@ -75,28 +75,6 @@
         popupTemplate: popupTemplate
       });
 
- // ************************************************************
-      // Define a pop-up for usaeduLayer
-      const popupEduusa = {
-        title: "{INSTNM}",
-        content: `
-          <b><a href='{WEBADDR}' target='_blank'>{INSTNM}</a></b><br>
-          Total Enrollment: {INSTSIZE}<br>
-          Enrollment Profile: {C21ENPRF}<br>
-          Address: {ADDR}
-        `
-      };
-
-      // Adding the const for the feature layer
-      const usaeduLayer = new FeatureLayer({
-        url: "https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/Colleges_and_Universities_View/FeatureServer/0", // URL to the feature layer
-        outFields: ["INSTNM","INSTSIZE", "WEBADDR", "C21ENPRF", "ADDR"], // Fields to include in the feature layer
-        popupTemplate: popupEduusa // Assign the popup template to the feature layer
-      });
-
-      //adding the feature layer to the map
-      map.add(usaeduLayer);
-
       // ************************************************************
       const polyline = {
         type: "polyline", // autocasts as new Polyline()
@@ -179,7 +157,27 @@
       // Add ALL the graphics (point, polyline, polygon) to the graphics layer
       view.graphics.addMany([pointGraphic, polylineGraphic, polygonGraphic]);
     
+     // ************************************************************
+      // Define a pop-up for usaeduLayer
+      const popupEduusa = {
+        title: "{INSTNM}",
+        content: `
+          <b><a href='{WEBADDR}' target='_blank'>{INSTNM}</a></b><br>
+          Total Enrollment: {INSTSIZE}<br>
+          Enrollment Profile: {C21ENPRF}<br>
+          Address: {ADDR}
+        `
+      };
 
+      // Adding the const for the feature layer
+      const usaeduLayer = new FeatureLayer({
+        url: "https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/Colleges_and_Universities_View/FeatureServer/0", // URL to the feature layer
+        outFields: ["INSTNM","INSTSIZE", "WEBADDR", "C21ENPRF", "ADDR"], // Fields to include in the feature layer
+        popupTemplate: popupEduusa // Assign the popup template to the feature layer
+      });
+
+      //adding the feature layer to the map
+      map.add(usaeduLayer);
   });
   </script>
 
