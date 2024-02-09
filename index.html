@@ -38,7 +38,7 @@
           container: "viewDiv" // Div element
         });
       
-      // ************************************************************
+      // ******CHALLENGE 1: Changing from default circle to square******
       const graphicsLayer = new GraphicsLayer();
       map.add(graphicsLayer);
 
@@ -60,7 +60,7 @@
 
         const simpleMarkerSymbol = { // Create a symbol for drawing the point
           type: "simple-marker",
-          style: "square", // CHALLENGE 1: Changing from default circle to square
+          style: "square", 
           color: [0, 0, 139], // Color of blues rock,
           outline: {
             color: [255, 255, 255], // White
@@ -75,7 +75,7 @@
         popupTemplate: popupTemplate
       });
 
-      // ************************************************************
+      // ******CHALLENGE 2: Add polyline and polygon******
       const polyline = {
         type: "polyline", // autocasts as new Polyline()
         paths: [[-97.758699, 30.265385],
@@ -157,9 +157,9 @@
       // Add ALL the graphics (point, polyline, polygon) to the graphics layer
       view.graphics.addMany([pointGraphic, polylineGraphic, polygonGraphic]);
     
-     // ************************************************************
+     // ******CHALLENGE 3: Create a popup template for the feature layer******
       // Define a pop-up for usaeduLayer
-      const popupEduusa = {
+      const popupEduusa = { 
         title: "{INSTNM}",
         content: `
           <b><a href='{WEBADDR}' target='_blank'>{INSTNM}</a></b><br>
