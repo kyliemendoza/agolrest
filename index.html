@@ -222,6 +222,48 @@
       //adding the feature layer to the map
       map.add(usairportLayer);
 
+      // ****** CHALLENGE 5: Create icon and label for heliport ******
+       // Setting up heliport icon
+       const heliportRenderer = {
+        type: "simple",
+        symbol: {
+          type: "picture-marker",
+          url: "https://kyliemendoza.github.io/agol/heliport_icon.png",
+          width: "18px",
+          height: "18px"
+        }
+      };
+
+      // const to make the airport labels
+      const heliportLabels = {
+        symbol: {
+          type: "text",
+          color: "#FFFFFF",
+          haloColor: "#5E8D74",
+          haloSize: "2px",
+          font: {
+            size: "12px",
+            family: "Noto Sans",
+            style: "italic",
+            weight: "normal"
+          }
+        },
+        labelPlacement: "above-center",
+        labelExpressionInfo: {
+          expression: "$feature.Fac_Name"
+        }
+      };
+
+      // Adding the const for the feature layer
+      const heliportLayer = new FeatureLayer({
+        url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/JSStackRead_USAirport/FeatureServer", // URL to the feature layer
+        renderer: heliportRenderer, // calling the airport icon
+        definitionExpression: "Fac_Type = 'Heliport'", // adding sql to filter for heliports
+        labelingInfo: [heliportLabels] // adding the heliport labels
+      });
+
+      //adding the feature layer to the map
+      map.add(heliportLayer);
   });
   </script>
 
