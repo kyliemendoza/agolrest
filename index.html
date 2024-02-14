@@ -180,16 +180,7 @@
       map.add(usaeduLayer);
 
       // ******CHALLENGE 4: Make feature layer of US_Airports.zip******
-      // Define a pop-up for usaeduLayer
-      const popupUSAirport = { 
-        title: "{Fac_Name}",
-        content: `
-          Owner: {Owner_Name}<br>
-          Owner Phone: {Owner_Phon}<br>
-          `
-      };
-
-       // Setting up airport icon
+      // Setting up airport icon
        const airportRenderer = {
         type: "simple",
         symbol: {
@@ -200,13 +191,32 @@
         }
       };
 
+      // const to make the airport labels
+      const airportLabels = {
+        symbol: {
+          type: "text",
+          color: "#FFFFFF",
+          haloColor: "#5E8D74",
+          haloSize: "2px",
+          font: {
+            size: "12px",
+            family: "Noto Sans",
+            style: "italic",
+            weight: "normal"
+          }
+        },
+        labelPlacement: "above-center",
+        labelExpressionInfo: {
+          expression: "$feature.Fac_Name"
+        }
+      };
+
       // Adding the const for the feature layer
       const usairportLayer = new FeatureLayer({
         url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/JSStackRead_USAirport/FeatureServer", // URL to the feature layer
-        outFields: ["Fac_Name", "Owner_Name", "Owner_Phon"], // Fields to include in the feature layer
-        popupTemplate: popupUSAirport, // Assign the popup template to the feature layer
         renderer: airportRenderer, // calling the airport icon
-        definitionExpression: "Fac_Type = 'Airport'" // adding sql to filter for airports
+        definitionExpression: "Fac_Type = 'Airport'", // adding sql to filter for airports
+        labelinginfo: [airportLabels] // adding the airport labels
       });
 
       //adding the feature layer to the map
