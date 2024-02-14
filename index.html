@@ -184,22 +184,34 @@
       const popupUSAirport = { 
         title: "{Fac_Name}",
         content: `
-          <b>{Fac_Name}</b><br>
           Facility Type: {Fac_Type}<br>
           Owner: {Owner_Name}<br>
           Owner Phone: {Owner_Phon}<br>
           `
       };
 
+       // Setting up airport icon
+       const airportRenderer = {
+        type: "simple",
+        symbol: {
+          type: "picture-marker",
+          url: "https://kyliemendoza.github.io/agol/outline_local_airport_black_24dp.png",
+          width: "18px",
+          height: "18px"
+        }
+      };
+
       // Adding the const for the feature layer
       const usairportLayer = new FeatureLayer({
         url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/JSStackRead_USAirport/FeatureServer", // URL to the feature layer
         outFields: ["Fac_Name","Fac_Type", "Owner_Name", "Owner_Phon"], // Fields to include in the feature layer
-        popupTemplate: popupUSAirport // Assign the popup template to the feature layer
+        popupTemplate: popupUSAirport, // Assign the popup template to the feature layer
+        renderer: airportRenderer
       });
 
       //adding the feature layer to the map
       map.add(usairportLayer);
+
   });
   </script>
 
