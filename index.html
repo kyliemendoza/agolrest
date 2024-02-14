@@ -187,14 +187,14 @@
           <b>{Fac_Name}</b><br>
           Facility Type: {Fac_Type}<br>
           Owner: {Owner_Name}<br>
-          OwnerPhone: {Owner_Phone}<br>
+          Owner Phone: {Owner_Phon}<br>
           `
       };
 
       // Adding the const for the feature layer
       const usairportLayer = new FeatureLayer({
         url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/JSStackRead_USAirport/FeatureServer", // URL to the feature layer
-        outFields: ["Fac_Name","Fac_Type", "Owner_Name", "Owner_Phone"], // Fields to include in the feature layer
+        outFields: ["Fac_Name","Fac_Type", "Owner_Name", "Owner_Phon"], // Fields to include in the feature layer
         popupTemplate: popupUSAirport // Assign the popup template to the feature layer
       });
 
