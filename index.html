@@ -278,13 +278,28 @@
             width: "25px",
             height: "25px"
           }
-        }
+        },
+        labelingInfo: [{  // Add this labelingInfo property
+          labelExpressionInfo: {
+            expression: "Concatenate(['Airport Code: ', $feature.Airport_Code])"
+          },
+          symbol: {
+            type: "text",  // autocasts as new TextSymbol()
+            color: "black",
+            haloColor: "white",
+            haloSize: "1px",
+            font: {  // autocast as new Font()
+              size: 12,
+              weight: "bold"
+            }
+          }
+        }]
       });
 
-       // Adding the feature layer to the map
-       map.add(myAirports);
+      // Adding the feature layer to the map
+      map.add(myAirports);
 
-       // Set the point layer's LayerInfo
+      // Set the point layer's LayerInfo
       const pointInfos = {
         layer: myAirports
       }
