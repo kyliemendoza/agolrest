@@ -24,9 +24,10 @@
       // Adding the module for the feature layers
       "esri/layers/FeatureLayer",
       // Adding the module for editor
-      "esri/widgets/Editor" // We want to target our editor to a layer we will host on AGOL!
+      "esri/widgets/Editor", // We want to target our editor to a layer we will host on AGOL!
+      "esri/widgets/Legend"
       ], function (esriConfig, Map, MapView, Graphic, Polyline, Polygon, GraphicsLayer,
-                   FeatureLayer, Editor) {
+                   FeatureLayer, Editor, Legend) {
 
       esriConfig.apiKey = "AAPK9c89b2be3b2847e5855098989dee99b2ti5ZLtJOzNptY3_yhg1lc2nqbYUD8RuNm4u3-LVBPsb_GdnzndOpiPIEc8_lM4bG"; //My API Key
       
@@ -275,11 +276,11 @@
           symbol: {  // symbol type expected depends on the geometry type
             type: "picture-marker",  // autocasts as new PictureMarkerSymbol()
             url: "https://kyliemendoza.github.io/agol/outline_local_airport_black_24dp.png",
-            width: "25px",
-            height: "25px"
+            width: "20px",
+            height: "20px"
           }
         },
-        labelingInfo: [{  // Add this labelingInfo property
+        labelingInfo: [{  // *********CHALLENGE 2: Add labels to your myAirports layer********
           labelExpressionInfo: {
             expression: "Concatenate(['Airport Code: ', $feature.Airport_Code])"
           },
@@ -290,7 +291,7 @@
             haloColor: "white",
             haloSize: "1px",
             font: {  // autocast as new Font()
-              size: 12,
+              size: 10,
               weight: "bold"
             }
           }
@@ -313,6 +314,20 @@
 
       // Add the editor widget to the view
       view.ui.add(editor, "top-right");
+
+      // ******Challenge 3: Add a legend to the map******
+      // Create a new Legend instance and add it to the view
+      const legend = new Legend({
+        view: view,
+        layerInfos: [{
+          layer: myAirports,
+          title: "My Airports"
+        }]
+      });
+
+      // Add the legend widget to the view
+      view.ui.add(legend, "bottom-right");
+      
   });
   </script>
 
