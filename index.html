@@ -282,7 +282,7 @@
         },
         labelingInfo: [{  // *********CHALLENGE 2: Add labels to your myAirports layer********
           labelExpressionInfo: {
-            expression: "Concatenate(['Airport Code: ', $feature.Airport_Code])"
+            expression: "Concatenate([$feature.Airport_Code])"
           },
           labelPlacement: "below-center",
           symbol: {
@@ -321,7 +321,7 @@
         view: view,
         layerInfos: [{
           layer: myAirports,
-          title: "My Airports"
+          title: "Airport Codes"
         }]
       });
 
