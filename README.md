@@ -1,2 +1,2 @@
-# JS Stack Read
-Imported Sounny's esrijs map
+# JS Stack Write
+My Esri JS Map accesssing AGOL
