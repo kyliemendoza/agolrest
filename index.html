@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Hello, AGOL! write this to database for me</title> 
+  <title>Hello, AGOL!</title> 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="" />
@@ -22,8 +22,11 @@
       "esri/geometry/Polygon",
       "esri/layers/GraphicsLayer",
       // Adding the module for the feature layers
-      "esri/layers/FeatureLayer"
-      ], function (esriConfig, Map, MapView, Graphic, Polyline, Polygon, GraphicsLayer, FeatureLayer) {
+      "esri/layers/FeatureLayer",
+      // Adding the module for editor
+      "esri/widgets/Editor" // We want to target our editor to a layer we will host on AGOL!
+      ], function (esriConfig, Map, MapView, Graphic, Polyline, Polygon, GraphicsLayer,
+                   FeatureLayer, Editor) {
 
       esriConfig.apiKey = "AAPK9c89b2be3b2847e5855098989dee99b2ti5ZLtJOzNptY3_yhg1lc2nqbYUD8RuNm4u3-LVBPsb_GdnzndOpiPIEc8_lM4bG"; //My API Key
       
@@ -222,7 +225,7 @@
       //adding the feature layer to the map
       map.add(usairportLayer);
 
-      // ****** CHALLENGE 5: Create icon and label for heliport ******
+      // ******CHALLENGE 5: Create icon and label for heliport******
        // Setting up heliport icon
        const heliportRenderer = {
         type: "simple",
@@ -264,6 +267,31 @@
 
       //adding the feature layer to the map
       map.add(heliportLayer);
+
+      // ******CHALLENGE 6: Add editor widget******
+      // Adding const for feature layer
+      const myAirports = new FeatureLayer({
+        url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/My_Airports/FeatureServer",
+        // Adding popup
+        outFields: ["Airport_Code"]
+       });
+
+       // Adding the feature layer to the map
+       map.add(myAirports);
+
+       // Set the point layer's LayerInfo
+      const pointInfos = {
+        layer: myAirports
+      }
+
+      // Begin Editor constructor
+      const editor = new Editor({
+        view: view,
+        layerInfos: [pointInfos]
+      }); // End Editor constructor
+
+      // Add the editor widget to the view
+      view.ui.add(editor, "top-right");
   });
   </script>
 
